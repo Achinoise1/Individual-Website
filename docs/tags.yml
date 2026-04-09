@@ -1,0 +1,66 @@
+docusaurus:
+  label: Docusaurus
+  permalink: /docusaurus
+  description: Docusaurus tag description
+
+aliyun:
+  label: Aliyun
+  permalink: /aliyun
+  description: 阿里云相关文章
+
+ecs:
+  label: ECS
+  permalink: /ecs
+  description: ECS 相关文章
+
+config:
+  label: Config
+  permalink: /config
+  description: Configuration related posts
+
+linux:
+  label: Linux
+  permalink: /linux
+  description: Linux 相关文章
+
+centos:
+  label: CentOS
+  permalink: /centos
+  description: CentOS 相关文章
+
+installation:
+  label: Installation
+  permalink: /installation
+  description: Installation related posts
+
+nvm:
+  label: Nvm
+  permalink: /nvm
+  description: Nvm related posts
+
+frontend:
+  label: Frontend
+  permalink: /frontend
+  description: Frontend related posts
+
+backend:
+  label: Backend
+  permalink: /backend
+  description: Backend related posts
+
+python:
+  label: Python
+  permalink: /python
+  description: Python related posts
+
+fundamental:
+  label: Fundamental
+  permalink: /fundamental
+  description: Fundamental related posts
+
+tools:
+  label: Tools
+  permalink: /tools
+  description: Tools related posts
+
+
