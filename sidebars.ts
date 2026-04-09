@@ -36,6 +36,35 @@ const sidebars: SidebarsConfig = {
                 'Backend/Python/basic/memory-manage',
               ],
             },
+            {
+              type: 'category',
+              label: 'Django 框架',
+              items: [
+                'Backend/Python/framework/Django/quickstart',
+                'Backend/Python/framework/Django/core-components',
+              ],
+            },
+            {
+              type: 'category',
+              label: 'Flask 框架',
+              items: [
+                'Backend/Python/framework/Flask/quickstart',
+                'Backend/Python/framework/Flask/core-components',
+                'Backend/Python/framework/Flask/context',
+              ],
+            },
+            {
+              type: 'category',
+              label: 'FastAPI 框架',
+              items: [
+                'Backend/Python/framework/FastAPI/quickstart',
+                'Backend/Python/framework/FastAPI/core-components',
+                'Backend/Python/framework/FastAPI/depend-inject',
+                'Backend/Python/framework/FastAPI/Pydantic',
+                'Backend/Python/framework/FastAPI/query-parse',
+                'Backend/Python/framework/FastAPI/routing',
+              ],
+            },
           ],
         },
       ],
