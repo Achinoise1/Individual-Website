@@ -63,4 +63,19 @@ tools:
   permalink: /tools
   description: Tools related posts
 
+django:
+  label: Django
+  permalink: /django
+  description: Django related posts
+
+fastapi:
+  label: FastAPI
+  permalink: /fastapi
+  description: FastAPI related posts
+
+flask:
+  label: Flask
+  permalink: /flask
+  description: Flask related posts
+
 

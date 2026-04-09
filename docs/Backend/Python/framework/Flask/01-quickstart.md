@@ -1,3 +1,8 @@
+---
+tags: [python, backend, flask]
+title: 快速搭建一个 Flask 项目
+---
+
 # 快速搭建一个 Flask 项目
 
 > **建议配置好 Python 虚拟环境后搭建 Flask 项目**

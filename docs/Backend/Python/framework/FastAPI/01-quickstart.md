@@ -1,3 +1,8 @@
+---
+tags: [python, backend, fastapi]
+title: 快速搭建一个 FastAPI 项目
+---
+
 # 快速搭建一个 FastAPI 项目
 
 > **建议配置好 Python 虚拟环境后搭建 FastAPI 项目**

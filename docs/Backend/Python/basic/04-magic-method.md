@@ -1,3 +1,8 @@
+---
+tags: [python, fundamental]
+title: 魔术方法/魔法函数 (Magic Methods)
+---
+
 # 魔术方法/魔法函数 (Magic Methods)
 
 在 Python 中，魔术方法和魔法函数其实是指同一个概念，只是叫法不同。更准确的称呼是魔术方法。

@@ -1,3 +1,8 @@
+---
+tags: [python, backend, django]
+title: 快速搭建一个 Django 项目
+---
+
 # 快速搭建一个 Django 项目
 
 > **建议配置好 Python 虚拟环境后搭建 Django 项目**

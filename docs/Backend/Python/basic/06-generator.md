@@ -1,3 +1,8 @@
+---
+tags: [python, fundamental]
+title: 生成器 (Generator)
+---
+
 # 生成器 (Generator)
 
 当我们需要处理大量数据时，以下列代码为例：

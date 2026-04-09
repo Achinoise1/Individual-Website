@@ -1,3 +1,8 @@
+---
+tags: [python, fundamental]
+title: "*args 和 **kwargs"
+---
+
 # *args 和 **kwargs
 
 ## 概念说明

@@ -3,6 +3,8 @@ tags: [python, fundamental]
 title: 内置库 struct
 ---
 
+# 内置库 struct
+
 `struct`是Python的内置标准库，不需要额外安装。它主要用于在Python的值与C语言结构体之间进行转换，常用于处理二进制数据。
 以下是一些`struct`的基本用法：
 

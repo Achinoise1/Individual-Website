@@ -1,3 +1,8 @@
+---
+tags: [python, fundamental]
+title: 装饰器 (Decorator)
+---
+
 # 装饰器 (Decorator)
 
 装饰器（Decorator） 是一个**接受函数作为参数并返回新函数**的可调用对象。它允许你在不修改原函数代码的情况下，动态地添加额外的功能。

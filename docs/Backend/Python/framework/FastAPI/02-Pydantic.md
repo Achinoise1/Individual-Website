@@ -1,3 +1,8 @@
+---
+tags: [python, backend, fastapi]
+title: Pydantic：校验、转换与序列化
+---
+
 # Pydantic：校验、转换与序列化
 
 Pydantic 是基于 Python 类型注解的数据校验库，通过声明式的模型定义，自动完成数据校验、类型转换与序列化输出。FastAPI 深度依赖 Pydantic 来实现其核心的数据验证与解析能力。
