@@ -31,6 +31,8 @@ const sidebars: SidebarsConfig = {
                 'Backend/Python/basic/mutable',
                 'Backend/Python/basic/copy',
                 'Backend/Python/basic/gil',
+                'Backend/Python/basic/syntactic-sugar',
+                'Backend/Python/basic/magic-methods',
                 'Backend/Python/basic/decorator',
                 'Backend/Python/basic/generator',
                 'Backend/Python/basic/args-kwargs',
