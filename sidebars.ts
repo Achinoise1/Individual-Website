@@ -27,7 +27,7 @@ const sidebars: SidebarsConfig = {
               label: '基础',
               items: [
                 'Backend/Python/basic/data-container',
-                'Backend/Python/basic/inside',
+                'Backend/Python/basic/inside-struct',
                 'Backend/Python/basic/mutable',
                 'Backend/Python/basic/copy',
                 'Backend/Python/basic/gil',

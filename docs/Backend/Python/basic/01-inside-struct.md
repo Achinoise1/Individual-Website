@@ -9,7 +9,6 @@ title: 内置库 struct
 以下是一些`struct`的基本用法：
 
 ```python
-
 import struct  # 需要先导入，虽然是内置库但不会自动导入
 
 # 基本用法示例
@@ -31,7 +30,6 @@ print(unpacked)  # 12345
 # 'd' - 8字节浮点数
 # 'c' - 字符
 # 's' - 字符串
-
 ```
 
 字节序（Byte Order）标记：  
