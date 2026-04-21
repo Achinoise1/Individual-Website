@@ -2,6 +2,20 @@
 
 ### VUnreleased
 
+#### docs: 新增 Django 系列基础文档
+
+**文档**
+- 更新 Django 快速搭建指南：补充虚拟环境配置步骤，完善项目目录结构说明，优化项目创建与启动流程
+- 新增 Django 应用管理：介绍应用结构组成、创建命令及在项目中注册应用的方式
+- 新增 Django 视图管理：涵盖视图函数创建、URL 路由配置与 Jinja2 模板渲染
+- 新增 Django 数据模型：介绍 ORM 模型设计、字段类型选择及多应用数据模型管理策略
+- 新增 Django 调试指南：介绍 VS Code 调试配置及 Django Debug Toolbar 安装与使用
+
+**构建/配置**
+- 侧边栏新增 Django 框架下的应用管理、视图管理、数据模型和调试页面入口
+
+### VUnreleased
+
 #### feat: 新增 struct 文档与 ICP 备案号
 
 **文档**
