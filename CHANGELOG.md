@@ -2,6 +2,15 @@
 
 ### VUnreleased
 
+#### docs: 新增 Django 自定义 SQL 与测试数据生成教程
+
+**文档**
+- 新增通过空迁移执行自定义 SQL 语句的方法，包含正向与撤销 SQL 的写法示例
+- 新增使用 Mockaroo 生成测试数据并导入 MySQL 数据库的完整流程说明
+- 修正 MySQL 章节中链接显示文本和措辞错误
+
+### VUnreleased
+
 #### feat: 代码块 diff 符号自动渲染
 
 **前端组件**
