@@ -38,15 +38,43 @@
 }
 
 .code-block-remove-line {
-  background-color: #6f1313;
+  position: relative;
+  background-color: rgba(215, 58, 73, 0.15);
   display: block;
   margin: 0 calc(-1 * var(--ifm-pre-padding));
-  padding: 0 var(--ifm-pre-padding);
+  padding: 0 var(--ifm-pre-padding) 0 calc(var(--ifm-pre-padding) - 3px);
+  border-left: 3px solid rgba(215, 58, 73, 0.5);
+}
+
+.code-block-remove-line::before {
+  content: '-';
+  position: absolute;
+  left: 4px;
+  color: rgba(215, 58, 73, 0.9);
+  font-weight: bold;
 }
 
 .code-block-add-line {
-  background-color: #4b5a2a;
+  position: relative;
+  background-color: rgba(40, 167, 69, 0.15);
   display: block;
   margin: 0 calc(-1 * var(--ifm-pre-padding));
-  padding: 0 var(--ifm-pre-padding);
+  padding: 0 var(--ifm-pre-padding) 0 calc(var(--ifm-pre-padding) - 3px);
+  border-left: 3px solid rgba(40, 167, 69, 0.5);
+}
+
+.code-block-add-line::before {
+  content: '+';
+  position: absolute;
+  left: 4px;
+  color: rgba(40, 167, 69, 0.9);
+  font-weight: bold;
+}
+
+[data-theme='dark'] .code-block-remove-line {
+  background-color: rgba(215, 58, 73, 0.25);
+}
+
+[data-theme='dark'] .code-block-add-line {
+  background-color: rgba(40, 167, 69, 0.2);
 }

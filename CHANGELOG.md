@@ -2,6 +2,21 @@
 
 ### VUnreleased
 
+#### feat: 代码块 diff 符号自动渲染
+
+**前端组件**
+- 通过 CSS `::before` 伪元素在 diff 行左侧自动显示 `+`/`-` 符号，无需在 Markdown 中手动添加
+- 修复 diff 高亮行与普通行的左侧缩进对齐问题，补偿 3px 左边框宽度
+- 通过 swizzle wrap `CodeBlock/Line` 组件实现扩展，升级兼容性更好
+
+#### docs: 新增 Django 连接 MySQL 教程
+
+**文档**
+- 新增 Django 使用 MySQL 数据库的完整配置步骤，推荐使用 pymysql 替代 mysqlclient 以避免编译问题
+- 修正数据库设置文档中两处标题层级错误
+
+### VUnreleased
+
 #### docs: 重构 Django 文档结构并新增数据库迁移章节
 
 **文档**

@@ -258,7 +258,7 @@ class Address(models.Model):
     # git-add-end
 ```
 
-### 自定义架构
+## 自定义架构
 
 有时我们需要进一步操作数据库模式，比如覆写表或者添加索引等。先通过 `cmd + T` 或者 `ctrl + T`，输入 `Customer`，快捷跳转到 Customer 模型：
 
@@ -304,7 +304,7 @@ Migrations for 'store':
 
 执行 `migrate` 后，查看 store 应用的 customer 表，此时名称已经变成了 `store_customers`。
 
-### 撤销 migration
+## 撤销 migration
 
 如果发现某次迁移有问题或者不需要了，可以使用如下命令来撤销迁移：
 
@@ -330,3 +330,76 @@ Running migrations:
 > 1. 修改Customer模型，修改 `first_name` 字段为 `given_name`
 > 2. 创建一次迁移并应用它
 > 3. 撤销这次迁移并删除迁移文件
+
+## 在 Django 中使用 MySQL
+
+> 参考视频: [Using_MySQL_in_Django](https://www.bilibili.com/video/BV1eX4y1f7Pz?buvid=YE475CE25E5DEE6C4D489CF6BE7345D3A0FA&is_story_h5=false&mid=s7e7OMeFxsQ0%2BaceMEAs0g%3D%3D&plat_id=114&share_from=ugc&share_medium=iphone&share_plat=ios&share_source=COPY&share_tag=s_i&timestamp=1776864904&unique_k=33AN7Dk&up_id=35923455&vd_source=8e3f5b7e9cf313d9ea63238d28816b11&p=16&spm_id_from=333.788.videopod.episodes#:~:text=%E3%80%90Setting%20Up-,the,-Database%E3%80%91Using_MySQL_in_Django)
+
+课程中虽然推荐安装 `mysqlclient` 来连接 MySQL 数据库，但在实际开发中，使用 `mysqlclient` 可能会遇到一些安装问题。一个更简单的替代方案是使用 `pymysql`，它是一个纯 Python 实现的 MySQL 客户端库，不需要编译 C 扩展。
+
+使用如下命令，依据提示输入密码登录 MySQL：
+
+```bash
+mysql -u root -p
+```
+
+创建数据表：
+
+```sql
+CREATE DATABASE storefront;
+```
+
+创建完成后退出 MySQL：
+
+```sql
+exit
+```
+
+安装 `pymysql`：
+
+```bash
+pip install pymysql
+```
+
+安装完成后，找到 `storefront/settings.py` 文件，
+
+在文件顶部添加以下代码来让 Django 使用 `pymysql` 作为 MySQL 的数据库引擎：
+
+```python
+import pymysql
+
+pymysql.install_as_MySQLdb()
+```
+
+找到 `DATABASES` 配置变量：
+
+```python
+DATABASES = {
+    'default': {
+# git-delete-start
+        'ENGINE': 'django.db.backends.sqlite3',
+# git-delete-end
+# git-add-start
+        'ENGINE': 'django.db.backends.mysql',
+# git-add-end
+# git-delete-start
+        'NAME': BASE_DIR / 'db.sqlite3',
+# git-delete-end
+# git-add-start
+        'NAME': 'storefront',
+        'HOST': 'localhost',
+        'USER': 'root',
+        'PASSWORD': 'your_mysql_password',
+        'PORT': '3306', # MySQL 默认端口，如果使用了其他端口，请修改
+# git-add-end
+    }
+}
+```
+
+执行如下命令让操作更新到数据库中：
+
+```bash
+python manage.py migrate
+```
+
+![alt text](03-setup-database/after-migration.png)
