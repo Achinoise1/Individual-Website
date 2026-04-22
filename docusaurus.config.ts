@@ -158,6 +158,30 @@ const config: Config = {
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
+      additionalLanguages: ['bash', 'latex', 'json', 'markdown', 'python'],
+        magicComments: [
+          // Remember to extend the default highlight class name as well!
+          {
+            className: 'theme-code-block-highlighted-line',
+            line: 'highlight-next-line',
+            block: { start: 'highlight-start', end: 'highlight-end' },
+          },
+          {
+            className: 'code-block-error-line',
+            line: 'This will error',
+            block: { start: 'error-start', end: 'error-end' },
+          },
+          {
+            className: 'code-block-remove-line',
+            line: 'git-remove-next-line',
+            block: { start: 'git-delete-start', end: 'git-delete-end' },
+          },
+          {
+            className: 'code-block-add-line',
+            line: 'git-add-next-line',
+            block: { start: 'git-add-start', end: 'git-add-end' },
+          },
+        ],
     },
   } satisfies Preset.ThemeConfig,
 };

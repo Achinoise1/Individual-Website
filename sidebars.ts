@@ -43,12 +43,10 @@ const sidebars: SidebarsConfig = {
               type: 'category',
               label: 'Django 框架',
               items: [
-                'Backend/Python/framework/Django/quickstart',
-                'Backend/Python/framework/Django/app-manage',
-                'Backend/Python/framework/Django/view-manage',
+                'Backend/Python/framework/Django/django-intro',
                 'Backend/Python/framework/Django/data-models',
-                'Backend/Python/framework/Django/debugging',
                 'Backend/Python/framework/Django/core-components',
+                'Backend/Python/framework/Django/setup-database',
               ],
             },
             {
