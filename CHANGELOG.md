@@ -2,6 +2,16 @@
 
 ### VUnreleased
 
+#### docs: 新增 Django ORM 介绍文档
+
+**文档**
+- 新增 Django ORM 章节：介绍 ORM 核心概念、相比手动 SQL 的优势以及在 Django 中的应用方式
+
+**构建/配置**
+- 侧边栏新增 Django ORM 文档入口
+
+### VUnreleased
+
 #### docs: 新增 Django 自定义 SQL 与测试数据生成教程
 
 **文档**
