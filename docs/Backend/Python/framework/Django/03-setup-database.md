@@ -333,8 +333,6 @@ Running migrations:
 
 ## 在 Django 中使用 MySQL
 
-> 参考视频: [Using MySQL in Django](https://www.bilibili.com/video/BV1eX4y1f7Pz?buvid=YE475CE25E5DEE6C4D489CF6BE7345D3A0FA&is_story_h5=false&mid=s7e7OMeFxsQ0%2BaceMEAs0g%3D%3D&plat_id=114&share_from=ugc&share_medium=iphone&share_plat=ios&share_source=COPY&share_tag=s_i&timestamp=1776864904&unique_k=33AN7Dk&up_id=35923455&vd_source=8e3f5b7e9cf313d9ea63238d28816b11&p=16&spm_id_from=333.788.videopod.episodes#:~:text=%E3%80%90Setting%20Up-,the,-Database%E3%80%91Using_MySQL_in_Django)
-
 课程中虽然推荐安装 `mysqlclient` 来连接 MySQL 数据库，但在实际开发中，使用 `mysqlclient` 可能会遇到一些安装问题。一个更简单的替代方案是使用 `pymysql`，它是一个纯 Python 实现的 MySQL 客户端库，不需要编译 C 扩展。
 
 使用如下命令，依据提示输入密码登录 MySQL：
@@ -406,8 +404,6 @@ python manage.py migrate
 
 ## 运行自定义SQL语句
 
-> 参考视频: [Running Custom SQL](https://www.bilibili.com/video/BV1eX4y1f7Pz?buvid=YE475CE25E5DEE6C4D489CF6BE7345D3A0FA&is_story_h5=false&mid=s7e7OMeFxsQ0%2BaceMEAs0g%3D%3D&plat_id=114&share_from=ugc&share_medium=iphone&share_plat=ios&share_source=COPY&share_tag=s_i&timestamp=1776864904&unique_k=33AN7Dk&up_id=35923455&vd_source=8e3f5b7e9cf313d9ea63238d28816b11&spm_id_from=333.788.videopod.episodes&p=17#:~:text=Up%20the%20Database%E3%80%91-,Running,-Custom%20SQL)
-
 有时我们需要更新数据库模式（？），可以通过创建空迁移实现：
 
 ```bash
@@ -465,8 +461,6 @@ class Migration(migrations.Migration):
 
 ## 生成 Dummy 数据
 
-> 参考视频：[Generating Dummy Data](https://www.bilibili.com/video/BV1eX4y1f7Pz?buvid=YE475CE25E5DEE6C4D489CF6BE7345D3A0FA&is_story_h5=false&mid=s7e7OMeFxsQ0%2BaceMEAs0g%3D%3D&plat_id=114&share_from=ugc&share_medium=iphone&share_plat=ios&share_source=COPY&share_tag=s_i&timestamp=1776864904&unique_k=33AN7Dk&up_id=35923455&vd_source=8e3f5b7e9cf313d9ea63238d28816b11&spm_id_from=333.788.videopod.episodes&p=17#:~:text=Setting%20Up%20the-,Database,-%E3%80%91Generating_Dummy_Data)
-
 有时候需要用一些 fake 数据来填充我们的数据库，以用于测试等，这里推荐一个 fake 数据生成工具 [Mockaroo](https://www.mockaroo.com/)，它提供了一个在线界面来配置要生成的数据结构和类型，并且支持导出为 SQL、CSV、JSON 等格式。
 
 ![alt text](03-setup-database/mockaroo.png)
@@ -502,3 +496,9 @@ class Migration(migrations.Migration):
 刷新数据库表结构，此时就可以看到 `store_customer` 表中新增了 1000 条数据：
 
 ![alt text](03-setup-database/store-customer-data.png)
+
+## 视频参考
+
+- [Using MySQL in Django](https://www.bilibili.com/video/BV1eX4y1f7Pz?buvid=YE475CE25E5DEE6C4D489CF6BE7345D3A0FA&is_story_h5=false&mid=s7e7OMeFxsQ0%2BaceMEAs0g%3D%3D&plat_id=114&share_from=ugc&share_medium=iphone&share_plat=ios&share_source=COPY&share_tag=s_i&timestamp=1776864904&unique_k=33AN7Dk&up_id=35923455&vd_source=8e3f5b7e9cf313d9ea63238d28816b11&p=16&spm_id_from=333.788.videopod.episodes#:~:text=%E3%80%90Setting%20Up-,the,-Database%E3%80%91Using_MySQL_in_Django)
+- [Running Custom SQL](https://www.bilibili.com/video/BV1eX4y1f7Pz?buvid=YE475CE25E5DEE6C4D489CF6BE7345D3A0FA&is_story_h5=false&mid=s7e7OMeFxsQ0%2BaceMEAs0g%3D%3D&plat_id=114&share_from=ugc&share_medium=iphone&share_plat=ios&share_source=COPY&share_tag=s_i&timestamp=1776864904&unique_k=33AN7Dk&up_id=35923455&vd_source=8e3f5b7e9cf313d9ea63238d28816b11&spm_id_from=333.788.videopod.episodes&p=17#:~:text=Up%20the%20Database%E3%80%91-,Running,-Custom%20SQL)
+- [Generating Dummy Data](https://www.bilibili.com/video/BV1eX4y1f7Pz?buvid=YE475CE25E5DEE6C4D489CF6BE7345D3A0FA&is_story_h5=false&mid=s7e7OMeFxsQ0%2BaceMEAs0g%3D%3D&plat_id=114&share_from=ugc&share_medium=iphone&share_plat=ios&share_source=COPY&share_tag=s_i&timestamp=1776864904&unique_k=33AN7Dk&up_id=35923455&vd_source=8e3f5b7e9cf313d9ea63238d28816b11&spm_id_from=333.788.videopod.episodes&p=17#:~:text=Setting%20Up%20the-,Database,-%E3%80%91Generating_Dummy_Data)
