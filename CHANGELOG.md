@@ -2,6 +2,14 @@
 
 ### VUnreleased
 
+#### docs: Django ORM 进阶文档新增注释与数据库函数章节
+
+**文档**
+- 新增 annotate() 注释用法：介绍为查询集添加自定义字段，以及 Value()、F() 表达式的使用与运算
+- 新增调用数据库函数章节：介绍 Func() 的使用方式，以及内置 Concat() 函数的快捷用法
+
+### VUnreleased
+
 #### refactor: 拆分 Django ORM 文档为三个独立页面
 
 **文档**

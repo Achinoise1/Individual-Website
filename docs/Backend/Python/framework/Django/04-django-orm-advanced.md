@@ -392,6 +392,91 @@ result  = Product.objects.aggregate(count=Count('id'), min_price=Min('unit_price
 result  = Product.objects.filter(unit_price__gt=20).aggregate(count=Count('id'), min_price=Min('unit_price'))
 ```
 
+## 注释
+
+有时候我们希望在查询集中添加一些注释来帮助调试或者记录一些额外的信息，Django 提供了 `annotate()` 方法来实现这个功能。例如我们想要在查询集中添加一个注释字段来计算每个产品的订单数量：
+
+```python
+queryset = Customer.objects.annotate(is_new=True)
+```
+
+保存并刷新：
+
+![alt text](04-django-orm-advanced/annotate-is-new.png)
+
+此时提示报错， `annotate()` 接受了非表达式类型的参数 `is_new`。
+
+Django 中提供了一个表达式基类 `Expression`，该类派生出了一系列的表达式类，例如 `F()`、`Func()`、`Value()`、`Aggregate()` 等等，这些表达式类可以用来构建复杂的查询和注释。
+
+也就是说我们不能直接传递布尔值，而是需要传递一个表达式对象。我们可以使用 `Value()` 函数来将其转换为表达式：
+
+```python
+from django.db.models import Value
+# highlight-next-line
+queryset = Customer.objects.annotate(is_new=Value(True))
+```
+
+保存并刷新，此时没有报错，查看 sql 执行情况：
+
+![alt text](04-django-orm-advanced/annotate-value-sql-execution.png)
+
+此时每个客户对象都会有一个名为 `is_new` 的新字段，并且值为 `True`。
+
+还是以上面的例子为基础，我们可以使用 `F()` 函数来构造一个新 id 字段：
+
+```python
+from django.db.models import F
+# highlight-next-line
+queryset = Customer.objects.annotate(new_id=F('id'))
+``` 
+
+保存并刷新，查看 sql 执行情况：
+
+![alt text](04-django-orm-advanced/annotate-f-sql-execution.png)
+
+我们还可以在此基础上进行运算：
+
+```python
+from django.db.models import F
+# highlight-next-line
+queryset = Customer.objects.annotate(new_id=F('id') + 1000)
+```
+
+保存并刷新，查看 sql 执行情况：
+
+![alt text](04-django-orm-advanced/annotate-calc-f-sql-execution.png)
+
+## 调用数据库函数
+
+Django 提供了一个 `Func()` 函数来调用数据库函数，例如我们想要在查询集中添加一个注释字段来显示用户完整名称：
+
+```python
+from django.db.models import Func
+# highlight-next-line
+queryset = Customer.objects.annotate(full_name=Func(F('first_name'), Value(' '), F('last_name'), function='CONCAT'))
+```
+
+保存并刷新，查看 sql 执行情况：
+
+![alt text](04-django-orm-advanced/annotate-func-sql-execution.png)
+
+![alt text](04-django-orm-advanced/annotate-func-sql-execution-result.png)
+
+当然，由于 Django 已经内置了 `Concat()` 函数，我们也可以直接使用它来实现同样的功能：
+
+```python
+from django.db.models import Concat, Value
+# highlight-next-line
+queryset = Customer.objects.annotate(full_name=Concat('first_name', Value(' '), 'last_name'))
+```
+
+这里可以不使用 `F()` 函数来引用字段，因为 `Concat()` 函数已经内置了对字段的处理。但是还是需要使用 `Value()` 函数来将常量字符串转换为表达式，否则会将常量字符串识别成要拼接的字段。
+
+> 完整的内置数据库函数列表可以参考：[Database Functions](https://docs.djangoproject.com/en/6.0/ref/models/database-functions/)。这里显示的函数是数据库通用函数，而每个数据库引擎会有特定的函数，需要使用 `Func()` 函数来调用。
+
+## 数据分组
+
+
 
 
 ## 视频参考
@@ -402,3 +487,5 @@ result  = Product.objects.filter(unit_price__gt=20).aggregate(count=Count('id'),
 - [Deferring Fields](https://www.bilibili.com/video/BV1eX4y1f7Pz/?buvid=YE475CE25E5DEE6C4D489CF6BE7345D3A0FA&is_story_h5=false&mid=s7e7OMeFxsQ0%2BaceMEAs0g%3D%3D&plat_id=114&share_from=ugc&share_medium=iphone&share_plat=ios&share_source=COPY&share_tag=s_i&timestamp=1776864904&unique_k=33AN7Dk&up_id=35923455&vd_source=8e3f5b7e9cf313d9ea63238d28816b11&spm_id_from=333.788.videopod.episodes&p=89#:~:text=%E3%80%90Django%20ORM%E3%80%91-,Deferring_Fields,-03%3A16)
 - [Selecting Related Objects](https://www.bilibili.com/video/BV1eX4y1f7Pz?buvid=YE475CE25E5DEE6C4D489CF6BE7345D3A0FA&is_story_h5=false&mid=s7e7OMeFxsQ0%2BaceMEAs0g%3D%3D&plat_id=114&share_from=ugc&share_medium=iphone&share_plat=ios&share_source=COPY&share_tag=s_i&timestamp=1776864904&unique_k=33AN7Dk&up_id=35923455&vd_source=8e3f5b7e9cf313d9ea63238d28816b11&spm_id_from=333.788.videopod.episodes&p=31#:~:text=%E3%80%90Django%20ORM%E3%80%91-,Selecting_Related_Objects,-09%3A14)
 - [Aggregating Objects](https://www.bilibili.com/video/BV1eX4y1f7Pz?buvid=YE475CE25E5DEE6C4D489CF6BE7345D3A0FA&is_story_h5=false&mid=s7e7OMeFxsQ0%2BaceMEAs0g%3D%3D&plat_id=114&share_from=ugc&share_medium=iphone&share_plat=ios&share_source=COPY&share_tag=s_i&timestamp=1776864904&unique_k=33AN7Dk&up_id=35923455&vd_source=8e3f5b7e9cf313d9ea63238d28816b11&spm_id_from=333.788.videopod.episodes&p=31#:~:text=%E3%80%90Django-,ORM,-%E3%80%91Aggregating_Objects)
+- [Annotating Objects](https://www.bilibili.com/video/BV1eX4y1f7Pz/?p=33&spm_id_from=333.1007.top_right_bar_window_history.content.click&vd_source=8e3f5b7e9cf313d9ea63238d28816b11#:~:text=%E3%80%90Django%20ORM%E3%80%91-,Annotating_Objects,-03%3A37)
+- [Calling Database Functions](https://www.bilibili.com/video/BV1eX4y1f7Pz/?p=33&spm_id_from=333.1007.top_right_bar_window_history.content.click&vd_source=8e3f5b7e9cf313d9ea63238d28816b11#:~:text=Calling_Database_Functions)
