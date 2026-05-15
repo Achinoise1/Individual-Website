@@ -2,6 +2,19 @@
 
 ### VUnreleased
 
+#### docs: Django ORM 文档补全数据操作与泛型关系章节
+
+**文档**
+- 新增数据分组章节：介绍通过 annotate() 结合 Count 统计关联对象数量
+- 新增表达式装饰器章节：介绍 ExpressionWrapper 解决复杂表达式输出类型问题
+- 新增查询泛型关系章节：通过 ContentType 模型安全获取内容类型 ID 并筛选泛型外键数据
+- 新增查询集缓存章节：说明 Django 缓存机制及其对查询次数的影响
+- 新增创建、更新、删除对象章节：覆盖 save()、create()、update()、delete() 的使用方式及注意事项
+- 新增事务章节：介绍 @transaction.atomic 装饰器与 with transaction.atomic() 上下文管理器的用法
+- 统一 ORM 系列文档视频参考链接格式，去除追踪参数，改为简短分集参数格式
+
+### VUnreleased
+
 #### docs: Django ORM 进阶文档新增注释与数据库函数章节
 
 **文档**
