@@ -117,8 +117,8 @@ const config: Config = {
           title: '文章',
           items: [
             {
-              label: 'Tutorial',
-              to: '/docs/intro',
+              label: 'Blog',
+              to: '/blog',
             },
           ],
         },

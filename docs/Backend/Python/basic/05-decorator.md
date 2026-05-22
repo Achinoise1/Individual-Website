@@ -263,7 +263,7 @@ def func2():
 func2 = decorator(x)(func2)
 ```
 
-语法糖是简化代码、提高可读性的一种语法，让我们能够以更清晰易懂的方式表达程序逻辑。有关语法糖的详细内容，见 [语法糖](/blog/syntactic-sugar-salt) 一文。
+语法糖是简化代码、提高可读性的一种语法，让我们能够以更清晰易懂的方式表达程序逻辑。有关语法糖的详细内容，见 [语法糖](/docs/Backend/Python/basic/syntactic-sugar) 一文。
 
 语法糖虽然简化了写法，但没有改变装饰器的本质：`func = decorator(x)(func)`。那么问题来了：
 
