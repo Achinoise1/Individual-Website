@@ -45,7 +45,7 @@ const sidebars: SidebarsConfig = {
               items: [
                 'Backend/Python/framework/Django/django-intro',
                 'Backend/Python/framework/Django/data-models',
-                'Backend/Python/framework/Django/core-components',
+                // 'Backend/Python/framework/Django/core-components',
                 'Backend/Python/framework/Django/setup-database',
                 'Backend/Python/framework/Django/django-orm',
                 'Backend/Python/framework/Django/django-orm-filtering',
@@ -57,8 +57,8 @@ const sidebars: SidebarsConfig = {
               label: 'Flask 框架',
               items: [
                 'Backend/Python/framework/Flask/quickstart',
-                'Backend/Python/framework/Flask/core-components',
-                'Backend/Python/framework/Flask/context',
+                // 'Backend/Python/framework/Flask/core-components',
+                // 'Backend/Python/framework/Flask/context',
               ],
             },
             {
@@ -66,11 +66,11 @@ const sidebars: SidebarsConfig = {
               label: 'FastAPI 框架',
               items: [
                 'Backend/Python/framework/FastAPI/quickstart',
-                'Backend/Python/framework/FastAPI/core-components',
-                'Backend/Python/framework/FastAPI/depend-inject',
+                // 'Backend/Python/framework/FastAPI/core-components',
+                // 'Backend/Python/framework/FastAPI/depend-inject',
                 'Backend/Python/framework/FastAPI/Pydantic',
-                'Backend/Python/framework/FastAPI/query-parse',
-                'Backend/Python/framework/FastAPI/routing',
+                // 'Backend/Python/framework/FastAPI/query-parse',
+                // 'Backend/Python/framework/FastAPI/routing',
               ],
             },
           ],

@@ -2,6 +2,13 @@
 
 ### VUnreleased
 
+#### chore: 隐藏侧边栏中未完成的文档页面
+
+**侧边栏配置**
+- 暂时注释掉 Django、Flask、FastAPI 框架中尚未完成的侧边栏条目，避免导航到缺失文档
+
+### VUnreleased
+
 #### docs: Django ORM 文档补全数据操作与泛型关系章节
 
 **文档**
