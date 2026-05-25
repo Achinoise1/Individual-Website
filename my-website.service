@@ -1,0 +1,13 @@
+[Unit]
+Description=My Website (Docusaurus)
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/data/projs/Individual-Website
+ExecStart=zsh -i -c 'source ~/.nvm/nvm.sh && npm run serve'
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
