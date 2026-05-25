@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 set -e
 
 # ── Colors (tput with graceful fallback) ──────────────────────────────────────
@@ -9,9 +9,9 @@ BOLD=$(tput bold 2>/dev/null || echo "")
 RESET=$(tput sgr0 2>/dev/null || echo "")
 
 # ── Logging helpers ───────────────────────────────────────────────────────────
-info()  { echo "${BOLD}${GREEN}[✓]${RESET} $*" }
-step()  { echo "${BOLD}${YELLOW}[→]${RESET} $*" }
-error() { echo "${BOLD}${RED}[✗]${RESET} $*" >&2 }
+info()  { echo "${BOLD}${GREEN}[✓]${RESET} $*"; }
+step()  { echo "${BOLD}${YELLOW}[→]${RESET} $*"; }
+error() { echo "${BOLD}${RED}[✗]${RESET} $*" >&2; }
 
 # ── Cleanup on error ──────────────────────────────────────────────────────────
 cleanup() {
@@ -50,7 +50,7 @@ if [[ $1 == "--init" ]]; then
   ssh $REMOTE "mkdir -p $REMOTE_DIR"
 
   step "Cloning repository on remote..."
-  ssh $REMOTE "zsh -i -c 'cd $REMOTE_PROJ_DIR && gcl git@github.com:Achinoise1/Individual-Website.git'"
+  ssh $REMOTE "cd $REMOTE_PROJ_DIR && git clone git@github.com:Achinoise1/Individual-Website.git"
   info "Git clone complete."
 
   step "Packaging and transferring node_modules..."
@@ -62,24 +62,24 @@ if [[ $1 == "--init" ]]; then
 
   step "Setting up systemd service..."
   scp my-website.service $REMOTE:/tmp/
-  ssh $REMOTE "zsh -i -c 'mv /tmp/my-website.service /etc/systemd/system/ && \
+  ssh $REMOTE "mv /tmp/my-website.service /etc/systemd/system/ && \
     chmod 644 /etc/systemd/system/my-website.service && \
-    setdr && systemctl enable my-website.service'"
+    systemctl daemon-reload && systemctl enable my-website.service"
   info "Systemd service registered."
 
   step "Setting up nginx configuration..."
   scp my-website.conf $REMOTE:/etc/nginx/conf.d/my-website.conf
-  ssh $REMOTE "zsh -i -c 'chmod 644 /etc/nginx/conf.d/my-website.conf && nginx -t && rstnginx'"
+  ssh $REMOTE "chmod 644 /etc/nginx/conf.d/my-website.conf && nginx -t && systemctl restart nginx"
   info "Nginx configured."
 
   step "Deploying build files..."
   ssh $REMOTE "tar xzf /tmp/build.tar.gz -C $REMOTE_DIR && rm /tmp/build.tar.gz"
   ssh $REMOTE "chmod -R 744 $REMOTE_DIR"
-  ssh $REMOTE "zsh -i -c 'rstmyweb'"
+  ssh $REMOTE "systemctl restart my-website.service"
 else
   step "Deploying build files..."
   ssh $REMOTE "tar xzf /tmp/build.tar.gz -C $REMOTE_DIR && rm /tmp/build.tar.gz"
-  ssh $REMOTE "zsh -i -c 'rstmyweb'"
+  ssh $REMOTE "systemctl restart my-website.service"
 fi
 
 info "Deployment complete. Your website should now be live."
