@@ -2,6 +2,18 @@
 
 ### VUnreleased
 
+#### refactor: 将部署架构从 Node.js 服务改为 nginx 静态文件服务
+
+**部署脚本**
+- 移除远程 node_modules 传输、git clone 及 systemd 服务安装等冗余初始化步骤
+- 部署完成后改用 chown www-data 授权并重载 nginx，不再重启 Node.js 服务
+
+**部署配置**
+- nginx 改为直接托管静态构建产物，移除对 Node.js 进程的反向代理
+- 新增自定义 404 页面及 /assets/ 静态资源长期缓存策略
+
+### VUnreleased
+
 #### feat: 新增 Bash 部署脚本并优化部署流程
 
 **部署脚本**
