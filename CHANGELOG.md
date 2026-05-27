@@ -2,6 +2,13 @@
 
 ### VUnreleased
 
+#### feat: 新增 new-doc 文档脚手架 Copilot 技能
+
+**工作流配置**
+- 新增 new-doc 技能，支持一键生成规范文档页面，自动处理路径、frontmatter、侧边栏注册及标签管理
+
+### VUnreleased
+
 #### feat: 为数据模型文档添加 Mermaid 图表支持
 
 **站点配置**
