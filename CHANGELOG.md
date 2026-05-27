@@ -2,6 +2,20 @@
 
 ### VUnreleased
 
+#### docs: 拆分 Django ORM 文档为多个专项篇章
+
+**文档内容**
+- 将原 Django ORM 进阶与筛选文档拆分为 4 个专项篇章：查询表达式、聚合与注解、增删改操作、关联对象查询
+- 查询篇新增字符串/日期/空值查询表达式、Q 对象复合条件、F 对象字段引用、结果排序、分页切片、查询子集、延迟字段及原生 SQL 等完整内容
+- 聚合篇新增 aggregate、annotate 及 ExpressionWrapper 的详细用法
+- CRUD 篇新增对象创建、批量插入、更新与删除操作及事务处理说明
+- 关联查询篇新增 select_related、prefetch_related 及泛型关系查询说明
+
+**侧边栏配置**
+- 更新侧边栏以反映 Django ORM 文档的拆分结构
+
+### VUnreleased
+
 #### feat: 新增 new-doc 文档脚手架 Copilot 技能
 
 **工作流配置**

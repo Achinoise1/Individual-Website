@@ -48,8 +48,11 @@ const sidebars: SidebarsConfig = {
                 // 'Backend/Python/framework/Django/core-components',
                 'Backend/Python/framework/Django/setup-database',
                 'Backend/Python/framework/Django/django-orm',
-                'Backend/Python/framework/Django/django-orm-filtering',
-                'Backend/Python/framework/Django/django-orm-advanced',
+                  'Backend/Python/framework/Django/django-orm-query',
+                  'Backend/Python/framework/Django/django-orm-relations',
+                  'Backend/Python/framework/Django/django-orm-aggregate',
+                  'Backend/Python/framework/Django/django-orm-crud',
+                  'Backend/Python/framework/Django/admin-site',
               ],
             },
             {
