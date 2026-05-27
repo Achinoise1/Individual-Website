@@ -195,6 +195,12 @@ const config: Config = {
   } satisfies Preset.ThemeConfig,
 
   plugins: ['docusaurus-plugin-image-zoom'],
+
+  markdown: {
+    mermaid: true,
+  },
+
+  themes: ['@docusaurus/theme-mermaid'],
 };
 
 export default config;

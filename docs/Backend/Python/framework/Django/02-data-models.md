@@ -50,6 +50,54 @@ title: 数据模型
   
 在此基础上，我们还可以添加一个标签（tag）实体，产品和标签之间是多对多的关系，在后续再详细展开说明。
 
+```mermaid
+classDiagram
+    class Collection {
+        +title: CharField
+    }
+    class Promotion {
+        +description: CharField
+        +discount: FloatField
+    }
+    class Product {
+        +title: CharField
+        +description: TextField
+        +price: DecimalField
+        +inventory: IntegerField
+        +last_updated: DateTimeField
+    }
+    class Customer {
+        +first_name: CharField
+        +last_name: CharField
+        +email: EmailField
+        +phone: CharField
+        +birth_date: DateField
+        +membership: CharField
+    }
+    class Order {
+        +placed_at: DateTimeField
+        +payment_status: CharField
+    }
+    class OrderItem {
+        +quantity: PositiveSmallIntegerField
+        +unit_price: DecimalField
+    }
+    class Cart {
+        +created_at: DateTimeField
+    }
+    class CartItem {
+        +quantity: PositiveSmallIntegerField
+    }
+
+    Collection "1" --> "0..*" Product : collection
+    Product "0..*" -- "0..*" Promotion : promotions
+    Customer "1" --> "0..*" Order : customer
+    Order "1" --> "1..*" OrderItem : order
+    OrderItem "0..*" --> "1" Product : product
+    Cart "1" --> "1..*" CartItem : cart
+    CartItem "0..*" --> "1" Product : product
+```
+
 ## 管理数据模型
 
 由于一个 django 项目下有多个应用，每个应用都可以定义自己的数据模型，这里将探究使用不同的方式来管理数据模型。
@@ -210,6 +258,25 @@ class Address(models.Model):
 
 那么是否需要在 `Customer` 模型中添加一个 `address` 字段来建立双向关系呢？答案是不需要，Django 会自动为我们创建一个反向关系，我们可以通过 `customer.address` 来访问关联的 `Address` 对象。
 
+```mermaid
+erDiagram
+    Customer {
+        int id PK
+        string first_name
+        string last_name
+        string email
+        string phone
+        date birth_date
+        char membership
+    }
+    Address {
+        int customer_id PK
+        string street
+        string city
+    }
+    Customer ||--o| Address : "address"
+```
+
 ### 定义一对多关系
 
 假设一个用户可以有多个地址，那么我们可以修改前面的 `Address` 模型来定义一对多关系：
@@ -284,7 +351,56 @@ class CartItem(models.Model):
 1. 在“多”的一方的模型中定义一个 `ForeignKey` 字段
 2. `ForeignKey` 字段的第一个参数是关联的模型类
 3. `on_delete` 参数指定当关联的对象被删除时，相关对象应该如何处理
+```mermaid
+erDiagram
+    Collection {
+        int id PK
+        string title
+    }
+    Product {
+        int id PK
+        string title
+        text description
+        decimal price
+        int inventory
+        int collection_id FK
+    }
+    Customer {
+        int id PK
+        string first_name
+        string last_name
+    }
+    Order {
+        int id PK
+        datetime placed_at
+        char payment_status
+        int customer_id FK
+    }
+    OrderItem {
+        int id PK
+        int quantity
+        decimal unit_price
+        int order_id FK
+        int product_id FK
+    }
+    Cart {
+        int id PK
+        datetime created_at
+    }
+    CartItem {
+        int id PK
+        int quantity
+        int cart_id FK
+        int product_id FK
+    }
 
+    Collection ||--o{ Product : "collection_id"
+    Customer ||--o{ Order : "customer_id"
+    Order ||--|{ OrderItem : "order_id"
+    Product ||--o{ OrderItem : "product_id"
+    Cart ||--|{ CartItem : "cart_id"
+    Product ||--o{ CartItem : "product_id"
+```
 ### 定义多对多关系
 
 结合前面的例子，这里我们定义一个新的实体促销（promotion），并与产品建立多对多关系：
@@ -314,6 +430,22 @@ class Product(models.Model):
 由于 Django 会自动创建反向关系，因此只需要在产品或者促销模型中定义一个 `ManyToManyField` 字段即可。
 
 > 注意：`ManyToManyField` 可以定义在关系的任意一方，Django 会在另一方自动生成反向访问器（默认名为 `<model_name>_set`，如 `product_set`）。一旦确定了定义侧，不要轻易变更，否则所有依赖该自动生成名称的代码都需要同步修改。
+
+```mermaid
+erDiagram
+    Product {
+        int id PK
+        string title
+        decimal price
+        int inventory
+    }
+    Promotion {
+        int id PK
+        string description
+        float discount
+    }
+    Product }o--o{ Promotion : "promotions"
+```
 
 ### 处理循环依赖
 
@@ -439,4 +571,40 @@ class LikedItem(models.Model):
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey('content_type', 'object_id')  
+```
+
+```mermaid
+erDiagram
+    Tag {
+        int id PK
+        string label
+    }
+    ContentType {
+        int id PK
+        string app_label
+        string model
+    }
+    TaggedItem {
+        int id PK
+        int tag_id FK
+        int content_type_id FK
+        int object_id
+    }
+    Product {
+        int id PK
+        string title
+    }
+    Order {
+        int id PK
+        datetime placed_at
+    }
+    Customer {
+        int id PK
+        string email
+    }
+    Tag ||--o{ TaggedItem : "tag_id"
+    ContentType ||--o{ TaggedItem : "content_type_id"
+    Product ||--o{ TaggedItem : "object_id"
+    Order ||--o{ TaggedItem : "object_id"
+    Customer ||--o{ TaggedItem : "object_id"
 ```
