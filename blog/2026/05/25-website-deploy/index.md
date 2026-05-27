@@ -1,11 +1,7 @@
 ---
 slug: website-deploy
 title: 网站一键部署指南
-authors:
-  name: Achinoise1
-  title: Website Owner
-  url: https://github.com/Achinoise1
-  image_url: https://github.com/Achinoise1.png
+authors: Achinoise
 tags: [linux, deploy, docusaurus]
 ---
 

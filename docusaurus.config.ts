@@ -86,6 +86,7 @@ const config: Config = {
       maxHeadingLevel: 4, // 将最大层级改为 5，即可显示 h2 到 h5
     },
     navbar: {
+      hideOnScroll: true,
       title: 'Red\'s Site',
       logo: {
         alt: 'My Site Logo',
@@ -184,7 +185,16 @@ const config: Config = {
           },
         ],
     },
+    zoom: {
+      selector: '.markdown :not(em) > img',
+      background: {
+        light: 'rgb(255, 255, 255)',
+        dark: 'rgb(50, 50, 50)',
+      },
+    },
   } satisfies Preset.ThemeConfig,
+
+  plugins: ['docusaurus-plugin-image-zoom'],
 };
 
 export default config;

@@ -78,3 +78,9 @@
 [data-theme='dark'] .code-block-add-line {
   background-color: rgba(40, 167, 69, 0.2);
 }
+
+/* Image zoom: ensure overlay and zoomed image appear above the navbar */
+.medium-zoom-overlay,
+.medium-zoom-image--opened {
+  z-index: 9999;
+}
