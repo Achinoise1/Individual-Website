@@ -47,15 +47,14 @@ if [[ $1 == "--init" ]]; then
   step "Creating remote directory..."
   ssh $REMOTE "mkdir -p $REMOTE_DIR"
 
+  step "Deploying build files..."
+  ssh $REMOTE "tar xzf /tmp/build.tar.gz -C $REMOTE_DIR && rm /tmp/build.tar.gz"
+  ssh $REMOTE "chown -R www-data:www-data $REMOTE_DIR"
+
   step "Setting up nginx configuration..."
   scp my-website.conf $REMOTE:/etc/nginx/conf.d/my-website.conf
   ssh $REMOTE "chmod 644 /etc/nginx/conf.d/my-website.conf && nginx -t && systemctl reload nginx"
   info "Nginx configured."
-
-  step "Deploying build files..."
-  ssh $REMOTE "tar xzf /tmp/build.tar.gz -C $REMOTE_DIR && rm /tmp/build.tar.gz"
-  ssh $REMOTE "chown -R www-data:www-data $REMOTE_DIR"
-  ssh $REMOTE "systemctl reload nginx"
 else
   step "Deploying build files..."
   ssh $REMOTE "tar xzf /tmp/build.tar.gz -C $REMOTE_DIR && rm /tmp/build.tar.gz"

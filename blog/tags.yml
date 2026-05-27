@@ -63,4 +63,9 @@ tools:
   permalink: /tools
   description: Tools related posts
 
+deploy:
+  label: Deploy
+  permalink: /deploy
+  description: Deploy related posts
+
 

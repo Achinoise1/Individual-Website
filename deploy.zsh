@@ -9,9 +9,9 @@ BOLD=$(tput bold 2>/dev/null || echo "")
 RESET=$(tput sgr0 2>/dev/null || echo "")
 
 # ── Logging helpers ───────────────────────────────────────────────────────────
-info()  { echo "${BOLD}${GREEN}[✓]${RESET} $*" }
-step()  { echo "${BOLD}${YELLOW}[→]${RESET} $*" }
-error() { echo "${BOLD}${RED}[✗]${RESET} $*" >&2 }
+info()  { echo "${BOLD}${GREEN}[✓]${RESET} $*"; }
+step()  { echo "${BOLD}${YELLOW}[→]${RESET} $*"; }
+error() { echo "${BOLD}${RED}[✗]${RESET} $*" >&2; }
 
 # ── Cleanup on error ──────────────────────────────────────────────────────────
 cleanup() {
@@ -47,20 +47,18 @@ if [[ $1 == "--init" ]]; then
   step "Creating remote directory..."
   ssh $REMOTE "mkdir -p $REMOTE_DIR"
 
+  step "Deploying build files..."
+  ssh $REMOTE "tar xzf /tmp/build.tar.gz -C $REMOTE_DIR && rm /tmp/build.tar.gz"
+  ssh $REMOTE "chown -R www-data:www-data $REMOTE_DIR"
+
   step "Setting up nginx configuration..."
   scp my-website.conf $REMOTE:/etc/nginx/conf.d/my-website.conf
   ssh $REMOTE "zsh -i -c 'chmod 644 /etc/nginx/conf.d/my-website.conf && nginx -t && rlnginx'"
   info "Nginx configured."
-
-  step "Deploying build files..."
-  ssh $REMOTE "tar xzf /tmp/build.tar.gz -C $REMOTE_DIR && rm /tmp/build.tar.gz"
-  ssh $REMOTE "chown -R www-data:www-data $REMOTE_DIR"
-  # ssh $REMOTE "zsh -i -c 'rstmyweb'"
 else
   step "Deploying build files..."
   ssh $REMOTE "tar xzf /tmp/build.tar.gz -C $REMOTE_DIR && rm /tmp/build.tar.gz"
   ssh $REMOTE "chown -R www-data:www-data $REMOTE_DIR"
-  # ssh $REMOTE "zsh -i -c 'rstmyweb'"
 fi
 
 info "Deployment complete. Your website should now be live."

@@ -4,7 +4,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
-const ICP = '<a href="https://beian.miit.gov.cn/"  style="color:gray" target="_blank">浙ICP备2022034316号-1</a>';
+// const ICP = '<a href="https://beian.miit.gov.cn/"  style="color:gray" target="_blank">浙ICP备2022034316号-1</a>';
 
 const config: Config = {
   title: 'Today Red\'s Site',
@@ -153,7 +153,8 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `Copyright © 2023-${new Date().getFullYear()} My Project <Br/> ${ICP}`,
+      copyright: `Copyright © 2023-${new Date().getFullYear()} My Project`,
+      // copyright: `Copyright © 2023-${new Date().getFullYear()} My Project <Br/> ${ICP}`,
     },
     prism: {
       theme: prismThemes.github,
