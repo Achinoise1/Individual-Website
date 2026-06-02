@@ -15,6 +15,21 @@
         "close": true
       },
       "problemMatcher": []
+    },
+    {
+      "label": "mmd-svg-sync",
+      "type": "shell",
+      "command": "node scripts/mmd-svg-sync.js",
+      "isBackground": true,
+      "runOptions": {
+        "runOn": "folderOpen"
+      },
+      "presentation": {
+        "reveal": "silent",
+        "panel": "dedicated",
+        "close": false
+      },
+      "problemMatcher": []
     }
   ]
 }

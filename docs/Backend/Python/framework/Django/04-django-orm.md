@@ -175,7 +175,9 @@ def say_hello(request):
     })
 ```
 
-> `get()` 方法可以接受一个特殊参数 `pk`，它是主键的缩写，等价于表中的主键，让我们免于记忆主键的名称。在 Product 表中等价于 `id` 字段。
+<div className="alert alert--info"> 
+    <span>`get()` 方法可以接受一个特殊参数 `pk`，它是主键的缩写，等价于表中的主键，让我们免于记忆主键的名称。在 Product 表中等价于 `id` 字段。</span> 
+</div>
 
 保存并刷新浏览器页面，点击右侧的 SQL 选项卡，可以看到 SQL 语句 执行情况：
 

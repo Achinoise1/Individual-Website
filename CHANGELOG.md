@@ -2,6 +2,27 @@
 
 ### VUnreleased
 
+#### feat: 新增 .mmd 文件自动编译为 SVG 的监听脚本
+
+**脚本工具**
+- 新增 .mmd 文件监听脚本：保存 Mermaid 图表文件后自动调用 mmdc 编译为同路径 SVG，无需手动执行
+
+**构建/配置**
+- 新增 VS Code 任务，工作区打开时自动在后台运行 mmd-svg-sync 脚本
+- 新增 `mmd-sync` npm 脚本支持手动触发
+- 引入 `@mermaid-js/mermaid-cli` 开发依赖，固定 `@docusaurus/theme-mermaid` 版本为 3.10.0
+
+**文档内容**
+- Django ORM 文档 `get()` 方法说明改用 info 提示样式
+
+**博客**
+- 修正部署教程文章内部锚点链接
+
+**前端源码**
+- 暂时隐藏首页按钮区块
+
+### VUnreleased
+
 #### docs: Django 数据模型文档新增 ER 关系图
 
 **文档内容**
