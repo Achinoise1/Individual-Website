@@ -2,6 +2,19 @@
 
 ### VUnreleased
 
+#### feat: 新增 Markdown 图片自动同步脚本及相关配置
+
+**脚本工具**
+- 新增 Markdown 图片自动同步脚本：监听 docs/blog 下 Markdown 文件变化，自动处理图片重命名与删除，保持图片目录整洁
+
+**构建/配置**
+- 新增 VS Code 任务，文件夹打开时自动在后台运行图片同步脚本
+- 新增 VS Code markdown 图片粘贴路径规则，图片自动放置在同名子目录下
+- 新增 `image-sync` npm 脚本支持手动触发图片同步
+- 修正 `start` 命令的 `--no-open` 参数位置
+
+### VUnreleased
+
 #### docs: 拆分 Django ORM 文档为多个专项篇章
 
 **文档内容**
