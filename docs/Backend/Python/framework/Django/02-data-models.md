@@ -22,8 +22,28 @@ title: 数据模型
 
 现在这两个实体是独立的关系，需要连接起来。假设产品和分类之间是多对一的关系，即一个分类下可以有多个产品，但一个产品只能属于一个分类。
 
-> 关系可以是一对一、一对多、多对多等，具体关系类型取决于业务需求。
+```mermaid
+erDiagram
+    Collection {
+        int id PK
+        string title
+    }
+    Product {
+        int id PK
+        string title
+        text description
+        decimal price
+        int inventory
+        int collection_id FK
+    }
 
+    Collection ||--o{ Product : classifies
+```
+
+<div className="alert alert--info"> 
+    <span>关系可以是一对一、一对多、多对多等，具体关系类型取决于业务需求。</span> 
+</div>
+<br/>
 现在还需要一个购物车（cart）实体：
 
 - 创建时间（可以进行清理，例如超过30天仍未结算的购物车） 
@@ -32,6 +52,28 @@ title: 数据模型
 
 - 一个购物车包含多个购物物品，一个购物物品只属于一个购物车
 - 一个购物物品对应一个产品，但一个产品可以对应多个购物物品
+
+```mermaid
+erDiagram
+    Cart {
+        int id PK
+        datetime created_at
+    }
+    CartItem {
+        int id PK
+        int quantity
+        int cart_id FK
+        int product_id FK
+    }
+    Product {
+        int id PK
+        string title
+        decimal price
+    }
+
+    Cart ||--|{ CartItem : contains
+    Product ||--o{ CartItem : references
+```
 
 由于我们需要允许用户在未登录情况下也能使用购物车，因此购物车暂时不与用户进行关联。
 
@@ -43,59 +85,65 @@ title: 数据模型
 
 简单起见先保留用户名和邮箱属性。一个用户可以有多个订单（order），对于订单实体，目前只关心**下单时间**。
 
+```mermaid
+erDiagram
+    User {
+        int id PK
+        string username
+        string email
+    }
+    Order {
+        int id PK
+        datetime placed_at
+        int user_id FK
+    }
+
+    User ||--o{ Order : places
+```
+
 由于产品和订单之间也存在多对多的关系，因此需要一个关联实体（订单项-order item）来连接它们。
 
 - 一个订单包含多个订单项，一个订单项只属于一个订单
 - 一个订单项对应一个产品，但一个产品可以对应多个订单项
   
+```mermaid
+erDiagram
+    Order {
+        int id PK
+        datetime placed_at
+    }
+    OrderItem {
+        int id PK
+        int quantity
+        decimal unit_price
+        int order_id FK
+        int product_id FK
+    }
+    Product {
+        int id PK
+        string title
+        decimal price
+    }
+
+    Order ||--|{ OrderItem : contains
+    Product ||--o{ OrderItem : references
+```
+
 在此基础上，我们还可以添加一个标签（tag）实体，产品和标签之间是多对多的关系，在后续再详细展开说明。
 
 ```mermaid
-classDiagram
-    class Collection {
-        +title: CharField
+erDiagram
+    Product {
+        int id PK
+        string title
+        decimal price
     }
-    class Promotion {
-        +description: CharField
-        +discount: FloatField
-    }
-    class Product {
-        +title: CharField
-        +description: TextField
-        +price: DecimalField
-        +inventory: IntegerField
-        +last_updated: DateTimeField
-    }
-    class Customer {
-        +first_name: CharField
-        +last_name: CharField
-        +email: EmailField
-        +phone: CharField
-        +birth_date: DateField
-        +membership: CharField
-    }
-    class Order {
-        +placed_at: DateTimeField
-        +payment_status: CharField
-    }
-    class OrderItem {
-        +quantity: PositiveSmallIntegerField
-        +unit_price: DecimalField
-    }
-    class Cart {
-        +created_at: DateTimeField
-    }
-    class CartItem {
-        +quantity: PositiveSmallIntegerField
+    Tag {
+        int id PK
+        string label
     }
 
-    Collection "1" --> "0..*" Product : collection
-    Product "0..*" -- "0..*" Promotion : promotions
-    Customer "1" --> "0..*" Order : customer
-    Order "1" --> "1..*" OrderItem : order
-    OrderItem "0..*" --> "1" Product : product
-    Cart "1" --> "1..*" CartItem : cart
-    CartItem "0..*" --> "1" Product : product
+    Product }o--o{ Tag : tagged_with
 ```
 
 ## 管理数据模型
@@ -182,7 +230,10 @@ class Customer(models.Model):
     birth_date = models.DateField(null=True)
 ```
 
-> 注意：Django 会自动为每个模型类添加一个名为 `id` 的主键字段，类型为 `AutoField`，并且会自动递增。因此在定义模型类时不需要显式地定义主键字段，除非你想使用不同类型的主键或者自定义主键名称。
+<div className="alert alert--info"> 
+    <span>注意：Django 会自动为每个模型类添加一个名为 `id` 的主键字段，类型为 `AutoField`，并且会自动递增。因此在定义模型类时不需要显式地定义主键字段，除非你想使用不同类型的主键或者自定义主键名称。</span> 
+</div>
+<br/>
 
 可用的字段类型有很多，例如 `CharField`、`TextField`、`DecimalField`、`IntegerField` 等等，具体使用哪种字段类型取决于数据的性质和需求。详细见[field-types](https://docs.djangoproject.com/en/6.0/ref/models/fields/#field-types)
 
@@ -351,56 +402,9 @@ class CartItem(models.Model):
 1. 在“多”的一方的模型中定义一个 `ForeignKey` 字段
 2. `ForeignKey` 字段的第一个参数是关联的模型类
 3. `on_delete` 参数指定当关联的对象被删除时，相关对象应该如何处理
-```mermaid
-erDiagram
-    Collection {
-        int id PK
-        string title
-    }
-    Product {
-        int id PK
-        string title
-        text description
-        decimal price
-        int inventory
-        int collection_id FK
-    }
-    Customer {
-        int id PK
-        string first_name
-        string last_name
-    }
-    Order {
-        int id PK
-        datetime placed_at
-        char payment_status
-        int customer_id FK
-    }
-    OrderItem {
-        int id PK
-        int quantity
-        decimal unit_price
-        int order_id FK
-        int product_id FK
-    }
-    Cart {
-        int id PK
-        datetime created_at
-    }
-    CartItem {
-        int id PK
-        int quantity
-        int cart_id FK
-        int product_id FK
-    }
 
-    Collection ||--o{ Product : "collection_id"
-    Customer ||--o{ Order : "customer_id"
-    Order ||--|{ OrderItem : "order_id"
-    Product ||--o{ OrderItem : "product_id"
-    Cart ||--|{ CartItem : "cart_id"
-    Product ||--o{ CartItem : "product_id"
-```
+![ER](02-data-models/one-to-many.svg)
+
 ### 定义多对多关系
 
 结合前面的例子，这里我们定义一个新的实体促销（promotion），并与产品建立多对多关系：
@@ -429,7 +433,10 @@ class Product(models.Model):
 
 由于 Django 会自动创建反向关系，因此只需要在产品或者促销模型中定义一个 `ManyToManyField` 字段即可。
 
-> 注意：`ManyToManyField` 可以定义在关系的任意一方，Django 会在另一方自动生成反向访问器（默认名为 `<model_name>_set`，如 `product_set`）。一旦确定了定义侧，不要轻易变更，否则所有依赖该自动生成名称的代码都需要同步修改。
+<div className="alert alert--info"> 
+    <span>注意：`ManyToManyField` 可以定义在关系的任意一方，Django 会在另一方自动生成反向访问器（默认名为 `<model_name>_set`，如 `product_set`）。一旦确定了定义侧，不要轻易变更，否则所有依赖该自动生成名称的代码都需要同步修改。</span> 
+</div>
+<br/>
 
 ```mermaid
 erDiagram
@@ -534,9 +541,16 @@ class TaggedItem(models.Model):
     # git-add-end
 ```
 
-> 注意：如果需要使用当前未定义的模型，可以使用字符串来引用模型，例如 `'Product'`，Django 会在运行时解析这个字符串并找到对应的模型类。
+<div className="alert alert--info"> 
+    <span>注意：如果需要使用当前未定义的模型，可以使用字符串来引用模型，例如 `'Product'`，Django 会在运行时解析这个字符串并找到对应的模型类。</span> 
+</div>
+<br/>
 
 此时我们只能将标签关联到产品上，如果想要将标签关联到订单或者客户上，就需要在 `TaggedItem` 模型中添加更多的 `ForeignKey` 字段，这样就会导致模型变得臃肿和难以维护。因此需要一个通用的解决方案来处理这种情况，这时就可以使用 Django 的泛化关系（generic relationships）来实现。
+
+![ER Diagram](02-data-models/generic-relationships.svg)
+
+为了实现这种“可以指向任意模型”的能力，Django 提供了 ContentType 和 GenericForeignKey。
 
 ```python
 # git-add-start
@@ -561,7 +575,15 @@ class TaggedItem(models.Model):
 2. `object_id`：一个 `PositiveIntegerField` 字段，表示关联对象的主键值
 3. `content_object`：一个 `GenericForeignKey` 字段，表示关联对象的实例，参数是前面两个字段的名称
 
-> 练习：创建一个新的 app 名为 `likes`，使用泛化关系实现喜欢项（LikedItem）：代表什么用户喜欢什么内容，用户模型源自 django.contrib.auth.models.User
+
+<details>
+<summary>练习：创建 likes app 并实现 LikedItem 泛化关系</summary>
+
+创建一个新的 app 名为 `likes`，使用泛化关系实现喜欢项（LikedItem）：代表什么用户喜欢什么内容，用户模型源自 `django.contrib.auth.models.User`。
+</details>
+
+<details>
+<summary>练习答案</summary>
 
 ```python
 from django.contrib.auth.models import User
@@ -570,41 +592,6 @@ class LikedItem(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     object_id = models.PositiveIntegerField()
-    content_object = GenericForeignKey('content_type', 'object_id')  
+    content_object = GenericForeignKey('content_type', 'object_id')
 ```
-
-```mermaid
-erDiagram
-    Tag {
-        int id PK
-        string label
-    }
-    ContentType {
-        int id PK
-        string app_label
-        string model
-    }
-    TaggedItem {
-        int id PK
-        int tag_id FK
-        int content_type_id FK
-        int object_id
-    }
-    Product {
-        int id PK
-        string title
-    }
-    Order {
-        int id PK
-        datetime placed_at
-    }
-    Customer {
-        int id PK
-        string email
-    }
-    Tag ||--o{ TaggedItem : "tag_id"
-    ContentType ||--o{ TaggedItem : "content_type_id"
-    Product ||--o{ TaggedItem : "object_id"
-    Order ||--o{ TaggedItem : "object_id"
-    Customer ||--o{ TaggedItem : "object_id"
-```
+</details>

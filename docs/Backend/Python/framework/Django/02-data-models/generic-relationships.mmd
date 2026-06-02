@@ -1,0 +1,33 @@
+erDiagram
+    Tag {
+        int id PK
+        string label
+    }
+    ContentType {
+        int id PK
+        string app_label
+        string model
+    }
+    TaggedItem {
+        int id PK
+        int tag_id FK
+        int content_type_id FK
+        int object_id
+    }
+    Product {
+        int id PK
+        string title
+    }
+    Order {
+        int id PK
+        datetime placed_at
+    }
+    Customer {
+        int id PK
+        string email
+    }
+    Tag ||--o{ TaggedItem : "tag_id"
+    ContentType ||--o{ TaggedItem : "content_type_id"
+    Product ||--o{ TaggedItem : "object_id"
+    Order ||--o{ TaggedItem : "object_id"
+    Customer ||--o{ TaggedItem : "object_id"

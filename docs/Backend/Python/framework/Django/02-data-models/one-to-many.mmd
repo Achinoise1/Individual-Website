@@ -1,0 +1,48 @@
+erDiagram
+    Collection {
+        int id PK
+        string title
+    }
+    Product {
+        int id PK
+        string title
+        text description
+        decimal price
+        int inventory
+        int collection_id FK
+    }
+    Customer {
+        int id PK
+        string first_name
+        string last_name
+    }
+    Order {
+        int id PK
+        datetime placed_at
+        char payment_status
+        int customer_id FK
+    }
+    OrderItem {
+        int id PK
+        int quantity
+        decimal unit_price
+        int order_id FK
+        int product_id FK
+    }
+    Cart {
+        int id PK
+        datetime created_at
+    }
+    CartItem {
+        int id PK
+        int quantity
+        int cart_id FK
+        int product_id FK
+    }
+
+    Collection ||--o{ Product : "collection_id"
+    Customer ||--o{ Order : "customer_id"
+    Order ||--|{ OrderItem : "order_id"
+    Product ||--o{ OrderItem : "product_id"
+    Cart ||--|{ CartItem : "cart_id"
+    Product ||--o{ CartItem : "product_id"

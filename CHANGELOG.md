@@ -2,6 +2,17 @@
 
 ### VUnreleased
 
+#### docs: Django 数据模型文档新增 ER 关系图
+
+**文档内容**
+- Django 数据模型文档新增 Mermaid ER 图，直观展示 Collection-Product、Cart-CartItem-Product、User-Order 等实体间的关联关系
+- 新增泛型关系与一对多关系的 Mermaid 源文件及对应 SVG 图
+
+**部署配置**
+- 移除旧版 systemd 服务配置文件
+
+### VUnreleased
+
 #### feat: 新增 Markdown 图片自动同步脚本及相关配置
 
 **脚本工具**
