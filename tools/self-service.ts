@@ -3,14 +3,14 @@ import type { ToolSection } from '../src/types/tools';
 const section: ToolSection = {
   icon: '🖥️',
   label: '自建服务',
-  order: 3,
+  order: 0,
   tools: [
     {
-      icon: '🏠',
-      title: 'Homepage',
-      description: '自建的导航仪表盘，整合了所有自托管服务的入口，支持服务状态监控。',
+      icon: '📸',
+      title: 'Screenshot-Export',
+      description: '自建的截图导出工具，支持多种视频导入格式，导出为高质量图片，完全掌控数据和隐私。',
       tags: ['selfHosted', 'openSource'],
-      href: '#', // 替换为你的实际地址
+      href: '/tools/screenshot-export', // 替换为你的实际地址
     },
     {
       icon: '📁',

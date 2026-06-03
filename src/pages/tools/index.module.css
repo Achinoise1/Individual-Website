@@ -157,3 +157,26 @@
   font-weight: 500;
   white-space: nowrap;
 }
+
+.toggleRow {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.toggleButton {
+  background: none;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 6px;
+  padding: 0.4rem 1.2rem;
+  font-size: 0.88rem;
+  color: var(--ifm-color-emphasis-700);
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.toggleButton:hover {
+  border-color: var(--ifm-color-primary);
+  color: var(--ifm-color-primary);
+}
+

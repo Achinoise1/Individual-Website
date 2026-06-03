@@ -3,7 +3,7 @@ import type { ToolSection } from '../src/types/tools';
 const section: ToolSection = {
   icon: '🌐',
   label: '在线工具',
-  order: 2,
+  order: 1,
   tools: [
     {
       icon: '✏️',

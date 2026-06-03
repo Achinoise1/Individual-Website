@@ -1,10 +1,12 @@
-import type { ReactNode } from 'react';
+import { type ReactNode, useState } from 'react';
 import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 import Layout from '@theme/Layout';
 import Heading from '@theme/Heading';
 import type { ToolItem, ToolSection } from '@site/src/types/tools';
 import styles from './index.module.css';
+
+const PAGE_SIZE = 4;
 
 const tagLabels: Record<string, string> = {
   free: '免费',
@@ -57,6 +59,10 @@ function ToolCard({ icon, title, description, tags, href }: ToolItem) {
 }
 
 function ToolSectionBlock({ icon, label, tools }: ToolSection) {
+  const [expanded, setExpanded] = useState(false);
+  const hasMore = tools.length > PAGE_SIZE;
+  const visible = expanded ? tools : tools.slice(0, PAGE_SIZE);
+
   return (
     <section className={styles.section}>
       <Heading as="h2" className={styles.sectionHeader}>
@@ -64,10 +70,20 @@ function ToolSectionBlock({ icon, label, tools }: ToolSection) {
         {label}
       </Heading>
       <div className={styles.grid}>
-        {tools.map((tool) => (
+        {visible.map((tool) => (
           <ToolCard key={tool.title} {...tool} />
         ))}
       </div>
+      {hasMore && (
+        <div className={styles.toggleRow}>
+          <button
+            className={styles.toggleButton}
+            onClick={() => setExpanded((v) => !v)}
+          >
+            {expanded ? '收起 ↑' : `展开更多 ↓（剩余 ${tools.length - PAGE_SIZE} 项）`}
+          </button>
+        </div>
+      )}
     </section>
   );
 }

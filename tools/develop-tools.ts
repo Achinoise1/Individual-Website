@@ -3,35 +3,21 @@ import type { ToolSection } from '../src/types/tools';
 const section: ToolSection = {
   icon: '🔧',
   label: '开发工具',
-  order: 1,
+  order: 2,
   tools: [
     {
-      icon: '💻',
-      title: 'VS Code',
-      description: '功能强大的开源代码编辑器，拥有丰富的插件生态，适合几乎所有编程语言。',
-      tags: ['free', 'openSource'],
-      href: 'https://code.visualstudio.com/',
-    },
-    {
       icon: '🐳',
-      title: 'Docker',
-      description: '容器化平台，让应用的打包、分发和部署变得标准化、可重复。',
+      title: 'Docker Compose',
+      description: '多容器编排工具，是本地微服务开发的关键组件。',
       tags: ['free', 'openSource'],
-      href: 'https://www.docker.com/',
+      href: 'https://docs.docker.com/compose/',
     },
     {
-      icon: '🌿',
-      title: 'Git',
-      description: '行业标准的分布式版本控制系统，开发者必备。',
+      icon: '📜',
+      title: 'Swagger / OpenAPI',
+      description: 'API 文档与接口规范工具，实现前后端契约化开发。',
       tags: ['free', 'openSource'],
-      href: 'https://git-scm.com/',
-    },
-    {
-      icon: '🦀',
-      title: 'Neovim',
-      description: '极度可定制的终端编辑器，以 Lua 驱动插件，深受终端爱好者喜爱。',
-      tags: ['free', 'openSource'],
-      href: 'https://neovim.io/',
+      href: 'https://swagger.io/',
     },
     {
       icon: '🐍',
