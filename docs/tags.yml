@@ -58,6 +58,16 @@ fundamental:
   permalink: /fundamental
   description: Fundamental related posts
 
+database:
+  label: Database
+  permalink: /database
+  description: Database related posts
+
+sql:
+  label: SQL
+  permalink: /sql
+  description: SQL related posts
+
 tools:
   label: Tools
   permalink: /tools

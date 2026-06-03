@@ -2,6 +2,19 @@
 
 ### VUnreleased
 
+#### feat: 新增 SQL 入门文档及数据库分类导航
+
+**文档内容**
+- 新增 SQL 语句与子句文档，涵盖 SELECT、WHERE、JOIN 等核心查询语句的用法与示例
+- 新增 `database` 与 `sql` 标签定义，完善内容分类体系
+- 更新 Django 泛型关联与一对多关系 ER 图，修正图表内容
+
+**侧边栏配置**
+- 新增数据库顶级分类及 SQL 子分类，将 SQL 文档纳入导航结构
+
+**部署配置**
+- 修复 nginx snippet 引用目录路径拼写错误（`screen-export` → `screenshot-export`）
+
 #### feat: 工具箱分区折叠与排序调整
 
 **工具箱页面**

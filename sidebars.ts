@@ -79,7 +79,20 @@ const sidebars: SidebarsConfig = {
           ],
         },
       ],
-    }
+    },
+    {
+      type: 'category',
+      label: '数据库',
+      items: [
+        {
+          type: 'category',
+          label: 'SQL',
+          items: [
+            'Database/SQL/sql-statement',
+          ],
+        },
+      ],
+    },
   ],
 };
 
