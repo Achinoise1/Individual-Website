@@ -1,0 +1,159 @@
+.toolsPage {
+  padding: 2rem 0 4rem;
+}
+
+.heroSection {
+  text-align: center;
+  padding: 3rem 1rem 2rem;
+  background: var(--ifm-hero-background-color);
+}
+
+.heroTitle {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.heroSubtitle {
+  font-size: 1.1rem;
+  color: var(--ifm-color-emphasis-600);
+  margin: 0;
+}
+
+.section {
+  padding: 2.5rem 0 1rem;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid var(--ifm-color-emphasis-200);
+  padding-bottom: 0.5rem;
+}
+
+.sectionIcon {
+  font-size: 1.4rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.25rem;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 8px;
+  padding: 1.25rem;
+  background: var(--ifm-card-background-color);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.cardIcon {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+  line-height: 1;
+}
+
+.cardTitle {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+
+.cardDescription {
+  font-size: 0.9rem;
+  color: var(--ifm-color-emphasis-700);
+  flex: 1;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.cardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: auto;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.tag {
+  font-size: 0.72rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  font-weight: 500;
+  border: 1px solid transparent;
+}
+
+.tagFree {
+  background: #d4edda;
+  color: #155724;
+  border-color: #c3e6cb;
+}
+
+[data-theme='dark'] .tagFree {
+  background: #1a3d27;
+  color: #6fcf97;
+  border-color: #2d6a3f;
+}
+
+.tagOpenSource {
+  background: #cce5ff;
+  color: #004085;
+  border-color: #b8daff;
+}
+
+[data-theme='dark'] .tagOpenSource {
+  background: #0d2d4a;
+  color: #56b3f4;
+  border-color: #1a4d75;
+}
+
+.tagSelfHosted {
+  background: #e2d9f3;
+  color: #4a235a;
+  border-color: #d1b9e8;
+}
+
+[data-theme='dark'] .tagSelfHosted {
+  background: #2d1a3a;
+  color: #c39bd3;
+  border-color: #4a2a5e;
+}
+
+.tagPaid {
+  background: #fff3cd;
+  color: #856404;
+  border-color: #ffeeba;
+}
+
+[data-theme='dark'] .tagPaid {
+  background: #3a2c00;
+  color: #f0c040;
+  border-color: #5a4500;
+}
+
+.linkButton {
+  font-size: 0.82rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  white-space: nowrap;
+}

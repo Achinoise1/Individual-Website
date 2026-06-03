@@ -2,6 +2,23 @@
 
 ### VUnreleased
 
+#### feat: 新增工具箱页面及 tools/ 数据目录
+
+**导航栏**
+- 新增「工具」导航项，指向 `/tools` 页面
+
+**新页面**
+- 新增 `src/pages/tools/` 工具箱页面，展示开发工具、在线工具、自建服务三个分区
+- 卡片式布局，响应式网格，支持标签徽章（免费/开源/自建/付费）
+
+**数据结构**
+- 新增 `src/types/tools.ts`，定义 `ToolItem`、`ToolSection` 共享类型
+- 新增 `tools/` 根目录，采用类似 `blog/` 的文件驱动方式管理工具数据
+  - `tools/develop-tools.ts` — 开发工具分区
+  - `tools/online-tools.ts` — 在线工具分区
+  - `tools/self-service.ts` — 自建服务分区
+- 页面通过 `require.context` 自动导入 `tools/` 下所有 `.ts` 文件，新增分区只需添加文件
+
 #### feat: 新增 .mmd 文件自动编译为 SVG 的监听脚本
 
 **脚本工具**
