@@ -88,4 +88,9 @@ flask:
   permalink: /flask
   description: Flask related posts
 
+mongodb:
+  label: MongoDB
+  permalink: /mongodb
+  description: MongoDB related posts
+
 

@@ -89,6 +89,16 @@ const sidebars: SidebarsConfig = {
           label: 'SQL',
           items: [
             'Database/SQL/sql-statement',
+            'Database/SQL/sql-join',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'MongoDB',
+          items: [
+            'Database/MongoDB/mongodb-basic',
+            'Database/MongoDB/mongodb-statement',
+            'Database/MongoDB/mongodb-document-statement',
           ],
         },
       ],
