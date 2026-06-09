@@ -37,6 +37,14 @@
   border-left: 3px solid #ff0000;
 }
 
+.code-block-correct-line {
+  background-color: #00ff0020;
+  display: block;
+  margin: 0 calc(-1 * var(--ifm-pre-padding));
+  padding: 0 var(--ifm-pre-padding);
+  border-left: 3px solid #00cc00;
+}
+
 .code-block-remove-line {
   position: relative;
   background-color: rgba(215, 58, 73, 0.15);

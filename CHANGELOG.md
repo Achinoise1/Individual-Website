@@ -2,6 +2,17 @@
 
 ### VUnreleased
 
+#### docs: 完善 SQL JOIN 文档内容及代码高亮配置
+
+**文档内容**
+- 完善 `sql-join.md`，新增内连接（INNER JOIN）完整章节，涵盖案例说明、使用场景、不适用场景与练习题
+- 新增 `CUSTOMERS`、`ORDERS`、`ORDER_ITEMS`、`PRODUCT` 四张表的 ER 图
+- 移除文档草稿状态（`draft: true`）
+
+**代码高亮**
+- `docusaurus.config.ts` 新增 `correct-start` / `correct-end` / `This is correct` magic comment 配置
+- `custom.css` 新增 `.code-block-correct-line` 绿色高亮样式
+
 #### docs: 新增 MongoDB 系列文档
 
 **文档内容**

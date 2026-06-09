@@ -175,6 +175,11 @@ const config: Config = {
             block: { start: 'error-start', end: 'error-end' },
           },
           {
+            className: 'code-block-correct-line',
+            line: 'This is correct',
+            block: { start: 'correct-start', end: 'correct-end' },
+          },
+          {
             className: 'code-block-remove-line',
             line: 'git-remove-next-line',
             block: { start: 'git-delete-start', end: 'git-delete-end' },
