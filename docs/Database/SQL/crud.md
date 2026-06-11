@@ -209,3 +209,209 @@ WHERE order_date < '2020-01-01'
 
 小练习：创建发票归档表（invoice_archived），归档发票数据，并把客户 id 列换成客户名列
 
+![alt text](crud/invoice-table-attr.png)
+
+<details>
+<summary>答案</summary>
+
+```sql
+CREATE TABLE invoice_archived AS
+SELECT 
+    i.invoice_id,
+    i.number,
+    c.name AS client
+    i.invoice_total
+    i.payment_total
+    i.invoice_date
+    i.due_date
+FROM invoices i
+JOIN clients c 
+    USING (client_id)
+WHERE i.payment_date IS NOT NULL
+```
+</details>
+
+## UPDATE
+
+### 更新单行
+
+更新语句的基本写法如下：
+
+```sql
+UPDATE <table>
+SET <attr1>=..., <attr2>=...
+WHERE <condition>
+```
+
+假设记录发票信息的系统出现异常，导致发票表中发票 1 中的 payment_total 和 payment_date 应有值却丢失。现在需要手动恢复这张发票的记录：
+
+![alt text](crud/invoice-table-attr.png)
+
+```sql
+UPDATE invoices
+SET payment_total = 10, payment_date = '2020-01-01'
+WHERE invoice_id = 1
+```
+
+如果发现修改有误，实际需要更新的是发票 3，可以通过以下语句将发票 1 恢复为默认值：
+
+```sql
+UPDATE invoices
+SET payment_total = DEFAULT, payment_date = NULL
+WHERE invoice_id = 1
+```
+
+再对发票 3 执行正确的更新：
+
+```sql
+UPDATE invoices
+SET 
+    payment_total = invoice_total * 0.5, 
+    payment_date = due_date
+WHERE invoice_id = 3
+```
+
+### 更新多行
+
+更新多行与更新单行的语法结构相同，区别仅在于 WHERE 条件的匹配范围更广。例如，在发票表中，客户 3 可能对应多张发票，我们可以通过一条语句更新该客户的所有发票记录：
+
+![alt text](crud/invoice-table-attr.png)
+
+```sql
+UPDATE invoices
+SET 
+    payment_total = invoice_total * 0.5, 
+    payment_date = due_date
+WHERE client_id = 3
+```
+
+如果需要同时更新多个客户的发票，可以使用 IN 操作符：
+
+```sql
+UPDATE invoices
+SET 
+    payment_total = invoice_total * 0.5, 
+    payment_date = due_date
+WHERE client_id IN (3, 4)
+```
+
+小练习：给每个在 1990 年之前出生的客户增加 50 点积分
+
+<details>
+<summary>答案</summary>
+
+```sql
+UPDATE customers
+SET points = points + 50
+WHERE birth_date < '1990-01-01'
+```
+</details>
+
+### 使用子查询
+
+本节介绍如何在 UPDATE 语句中结合子查询进行条件匹配。以下面的例子为例：
+
+```sql
+UPDATE invoices
+SET 
+    payment_total = invoice_total * 0.5, 
+    payment_date = due_date
+WHERE client_id = 3
+```
+
+如果不知道客户的 ID，只清楚客户的名称，就需要先通过名称查询对应的客户 ID：
+
+```sql
+SELECT client_id
+FROM clients
+WHERE name = "Myworks"
+```
+
+再将查询到的 ID 作为条件用于更新语句：
+
+```sql
+UPDATE invoices
+SET 
+    payment_total = invoice_total * 0.5, 
+    payment_date = due_date
+WHERE client_id IN (
+    SELECT client_id
+    FROM clients
+    WHERE name = "Myworks"
+)
+```
+
+> **建议**：在执行此类更新前，先单独运行子查询确认返回结果是否正确，避免误更新数据。
+
+小练习：编写一条 SQL 语句，为积分超过 3000 分的顾客更新订单备注。
+
+```mermaid
+erDiagram
+    CUSTOMERS {
+        int customer_id PK
+        varchar first_name
+        varchar last_name
+        date birth_date
+        varchar phone
+        varchar address
+        varchar city
+        char state
+        int points
+    }
+```
+
+![alt text](crud/orders-table-attr.png)
+
+<details>
+<summary>答案</summary>
+
+```sql
+UPDATE orders
+SET 
+    comments = "Gold customer"
+WHERE customer_id IN (
+    SELECT customer_id
+    FROM customers
+    WHERE points > 3000
+)
+```
+</details>
+
+## DELETE
+
+删除行数据的基本语句为：
+
+```sql
+DELETE FROM <table>
+WHERE condition
+```
+
+> **注意**：执行删除操作时务必仔细确认 WHERE 条件，避免误删数据。
+
+假设我们要删除发票 1 的数据，可以执行如下内容：
+
+```sql
+DELETE FROM invoices
+WHERE invoice_id = 1
+```
+
+这里同样可以使用子查询。假设我们想删除名字叫 Myworks 的客户的所有发票，先查询该客户的信息：
+
+```sql
+SELECT * 
+FROM clients
+WHERE name = 'Myworks'
+```
+
+再将子查询嵌入 DELETE 语句中执行删除：
+
+```sql
+DELETE FROM invoices
+WHERE client_id = (
+    SELECT client_id 
+    FROM clients
+    WHERE name = 'Myworks'
+)
+```
+
+> **提示**：建议在执行 DELETE 前先用 SELECT 验证子查询的结果范围，确认无误后再执行删除操作。
