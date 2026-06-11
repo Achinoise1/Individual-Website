@@ -1,9 +1,9 @@
 ---
 tags: [python, backend, django]
-title: ORM 查询
+title: 查询
 ---
 
-# ORM 查询
+# 查询
 
 ## 筛选对象
 

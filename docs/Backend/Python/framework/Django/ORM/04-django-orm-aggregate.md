@@ -1,9 +1,9 @@
 ---
 tags: [python, backend, django]
-title: ORM 聚合与表达式
+title: 聚合与表达式
 ---
 
-# ORM 聚合与表达式
+# 聚合与表达式
 
 ## 聚合
 

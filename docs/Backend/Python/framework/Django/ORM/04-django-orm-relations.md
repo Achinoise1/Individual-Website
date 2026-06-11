@@ -1,9 +1,9 @@
 ---
 tags: [python, backend, django]
-title: ORM 关联查询
+title: 关联查询
 ---
 
-# ORM 关联查询
+# 关联查询
 
 ## 选择关联对象
 

@@ -1,11 +1,11 @@
 ---
 tags: [python, backend, django]
-title: ORM
+title: 简介
 ---
 
-# ORM
+# 简介
 
-## 简介
+## ORM 基础
 
 ORM（Object-Relational Mapping）是一种将关系型数据库中的数据表映射为面向对象编程语言中的类和对象的技术。它允许开发者使用面向对象的方式来操作数据库，而不需要直接编写 SQL 语句。
 

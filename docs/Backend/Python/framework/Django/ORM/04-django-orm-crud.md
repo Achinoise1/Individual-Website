@@ -1,9 +1,9 @@
 ---
 tags: [python, backend, django]
-title: ORM 增删改
+title: 增删改
 ---
 
-# ORM 增删改
+# 增删改
 
 ## 创建对象
 
