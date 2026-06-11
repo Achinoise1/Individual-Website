@@ -209,3 +209,46 @@ FROM order_items oi
 JOIN products p ON p.product_id = oi.product_id
 ```
 </details>
+
+## 跨数据库连接
+
+现实生活中会经常用到多个数据库，本节内容将介绍如何将分散在多个数据库中的表中的列合并起来。
+
+假设我们想要数据库 1 的 order_items 表和数据库 2 的 products 表连接到一起：
+
+```sql
+SELECT * FROM database_1.order_items oi
+JOIN database_2.products p
+    ON oi.product_id = p.product_id
+```
+
+## 自连接（Self Joins）
+
+SQL 允许一张表与自身进行连接，这种操作称为自连接。例如，我们想要查询所有员工及其对应的管理人员：
+
+```mermaid
+erDiagram
+    employees {
+        int employee_id PK
+        varchar first_name
+        varchar last_name
+        varchar job_title
+        int salary
+        int reports_to
+        int office_id
+    }
+```
+
+```sql
+SELECT 
+    e.employee_id, 
+    e.first_name,
+    e.last_name,
+    m.employee_id as manager_id,
+    m.first_name as manager
+FROM employees e
+JOIN employees m
+    ON e.reports_to = m.employee_id
+```
+
+可以看出，自连接的写法与普通连接基本一致，唯一的区别在于：**必须为同一张表使用不同的别名**（如上述示例中的 e 和 m），以便区分员工表和管理者表。同时，在 SELECT 子句中引用列时也需要通过别名加以区分。
