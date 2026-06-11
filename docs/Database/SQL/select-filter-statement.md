@@ -1,9 +1,9 @@
 ---
 tags: [sql, database]
-title: SQL 语句与子句
+title: 选择/筛选子句
 ---
 
-# SQL 语句与子句
+# 选择/筛选子句
 
 ## 选择语句
 

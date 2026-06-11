@@ -2,6 +2,20 @@
 
 ### VUnreleased
 
+#### refactor(docs): 重命名 SQL 文档文件并新增 CRUD 占位页
+
+**文档重命名**
+- `sql-statement.md` → `select-filter-statement.md`，文档标题更新为「选择/筛选子句」
+- `sql-join.md` → `join.md`，文档标题更新为「连接（JOIN）」
+
+**新增文档**
+- 新增 `crud.md` 占位页，标题「CRUD 操作」，待后续填充内容
+
+**侧边栏配置**
+- 更新 `sidebars.ts` 中对应的文档路径引用，与重命名保持一致
+
+### VUnreleased
+
 #### docs: 完善 SQL JOIN 文档内容及代码高亮配置
 
 **文档内容**

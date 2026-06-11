@@ -88,8 +88,9 @@ const sidebars: SidebarsConfig = {
           type: 'category',
           label: 'SQL',
           items: [
-            'Database/SQL/sql-statement',
-            'Database/SQL/sql-join',
+            'Database/SQL/select-filter-statement',
+            'Database/SQL/join',
+            'Database/SQL/crud',
           ],
         },
         {

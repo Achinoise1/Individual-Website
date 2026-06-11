@@ -1,9 +1,9 @@
 ---
 tags: [sql, database]
-title: SQL 连接（JOIN）
+title: 连接（JOIN）
 ---
 
-# SQL 连接（JOIN）
+# 连接（JOIN）
 
 ## 内连接 (Inner Join)
 
