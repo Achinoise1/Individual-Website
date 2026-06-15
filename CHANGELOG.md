@@ -2,6 +2,56 @@
 
 ### VUnreleased
 
+#### docs: 扩充 SQL JOIN 文档（多表连接、外连接、复合条件等）
+
+**文档内容**
+- `join.md` 新增多表连接章节：演示同时连接 `customers`、`orders`、`order_statuses` 三张表，并附练习题
+- 新增复合连接条件章节：以 `order_items`（联合主键）与 `order_item_notes` 的连接为例说明多列 ON 条件写法
+- 新增隐式连接语法章节：对比显式 `JOIN ... ON` 与隐式 `FROM a, b WHERE` 写法，并说明后者的风险
+- 新增外连接章节：介绍 `LEFT JOIN` / `RIGHT JOIN` 语义，含练习题（查询每个产品的被订购次数）
+- 新增多表外连接章节：示例同时使用多个 `LEFT JOIN`，含练习题（订单报告）
+- 新增"如何确定 FROM/JOIN 的表"指南：从核心业务数据、外键方向、LEFT JOIN 语义三个角度给出决策建议，并附汇总表格
+
+**配图**
+- 新增 `join/order-status-table.png`：order\_statuses 表数据截图
+- 新增 `join/multiple-join-result.png`：多表连接查询结果截图
+- 新增 `join/order-items-data.png`：order\_items 表数据截图
+- 新增 `join/order-items-schema.png`：order\_items 表结构截图
+- 新增 `join/notes-table-data.png`：order\_item\_notes 表数据截图
+- 新增 `join/inner-join-result-o.png`：内连接查询结果截图（仅含下过单的客户）
+
+**配置**
+- `docusaurus.config.ts` 更新 `editUrl` 为正确的 GitHub 仓库地址（`Achinoise1/Individual-Website`）
+
+#### docs: 新增 SQL 跨数据库连接与自连接内容
+
+**文档内容**
+- `join.md` 新增跨数据库连接章节：介绍跨库查询语法（`数据库名.表名`）及注意事项
+- 新增自连接（Self Join）章节：以员工-管理者层级关系为例，说明同一张表使用不同别名进行自连接的写法
+
+#### docs: 完善 SQL CRUD 文档内容并新增 invoice 属性图
+
+**文档内容**
+- `crud.md` 补充完善 CRUD 操作内容（206 行新增）
+- 新增 `crud/invoice-table-attr.png` 属性示意图
+
+#### docs: 新增 SQL CRUD 文档内容及配图
+
+**文档内容**
+- `crud.md` 新增 SQL CRUD 操作文档（204 行）
+- 新增配图：`column-attr-show.png`、`customers-table-attr.png`、`order-archived-design.png`、`orders-archive-attr.png`、`orders-item-attr.png`、`orders-table-attr.png`、`products-table-attr.png`、`shippers-table-attr.png`
+
+#### refactor: 将 Django ORM 文档整理至 ORM 子目录并更新侧边栏
+
+**文档重构**
+- 将 `Django/04-django-orm*.md` 及所有相关配图迁移至 `Django/ORM/` 子目录
+- 更新各文档内部图片引用路径，与新目录结构保持一致
+
+**侧边栏配置**
+- 更新 `sidebars.ts` 中 Django ORM 系列文档的路径引用
+
+### VUnreleased
+
 #### refactor(docs): 重命名 SQL 文档文件并新增 CRUD 占位页
 
 **文档重命名**
